@@ -1,0 +1,21 @@
+insert into recommendation (id, comment, email, product_id, product_name, rating, status) values (default, ?, ?, ?, ?, ?, ?) [23505-214]]] with root cause
+insert into recommendation (id, comment, email, product_id, product_name, rating, status) values (default, ?, ?, ?, ?, ?, ?)
+
+ {
+"id": 1,
+"productName": "bomme",
+"productId": 0,
+"email": "killer@killer.se",
+"comment": "x",
+"rating": 3,
+"status": 1
+}
+
+ RecoEntity r = new RecoE
+ r.setProductName(recom.g
+ r.setProductName(recom.g
+ r.setComment(recom.getCo
+ r.setEmail(recom.getEmai
+ r.setRating(recom.getRat
+ r.setStatus(1);
+ reco.save(recom);
