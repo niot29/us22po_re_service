@@ -28,6 +28,11 @@ public class RecoController {
         return recoService.allRec();
     }
 
+    @GetMapping("{productId}")
+    public List<RecoEntity> getRecoMsgListOnProduct(@PathVariable ("productId") int productId){
+        logger.info("getRecoMsgList() - on product ID {}",productId);
+        return recoService.allProductRec(productId);
+    }
     @PostMapping
     public String createRecoMsg(@RequestBody RecoEntity reco){
         logger.info("createRecoMsg()");
@@ -35,7 +40,7 @@ public class RecoController {
     }
 
     @DeleteMapping("{recomsgId}")
-    public void diactivetRecoMsg(@PathVariable ("recomsgId") Integer productId){
+    public void diactivetRecoMsg(@PathVariable ("recomsgId") int productId){
         logger.info("diactivetRecoMsg({})", productId);
         recoService.diactivetRecomByProdId(productId);
     }
