@@ -43,7 +43,11 @@ public class RecoServcice {
      */
     @Transactional
     public String createRecom(RecoEntity recom){
-        logger.info("createRecom()");
+        logger.info("createRecom(): {}" ,recom);
+        if (recom.getRating() > 10 || recom.getRating() <= 0){
+            logger.warn("createRecom(): Rating is out of scale {}" ,recom.getRating());
+            return "Rating is out of scale";
+        }
         try{
             RecoEntity r = new RecoEntity();
             r.setProductName(recom.getProductName());
