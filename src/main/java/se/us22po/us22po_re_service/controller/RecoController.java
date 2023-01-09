@@ -3,6 +3,7 @@ package se.us22po.us22po_re_service.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import se.us22po.us22po_re_service.entity.RecoEntity;
 import se.us22po.us22po_re_service.service.RecoServcice;
@@ -19,7 +20,8 @@ public class RecoController {
 
     @GetMapping(value = "info")
     public String info(){
-        return "The application is up ..";
+        logger.info("info()");
+        return "The application (RecommendationService) is up ..";
     }
 
     @GetMapping
@@ -34,9 +36,11 @@ public class RecoController {
         return recoService.allProductRec(productId);
     }
     @PostMapping
-    public String createRecoMsg(@RequestBody RecoEntity reco){
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createRecoMsg(@RequestBody RecoEntity reco){
         logger.info("createRecoMsg()");
-        return recoService.createRecom(reco);
+        recoService.createRecom(reco);
+        //return recoService.createRecom(reco);
     }
 
     @DeleteMapping("{recomsgId}")
@@ -44,6 +48,7 @@ public class RecoController {
         logger.info("diactivetRecoMsg({})", productId);
         recoService.diactivetRecomByProdId(productId);
     }
+
 
 
 }
