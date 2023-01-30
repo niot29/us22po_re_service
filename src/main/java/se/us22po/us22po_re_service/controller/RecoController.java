@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.ClientResponse;
+import reactor.core.publisher.Mono;
 import se.us22po.us22po_re_service.entity.RecoEntity;
 import se.us22po.us22po_re_service.service.RecoServcice;
 
@@ -36,15 +39,19 @@ public class RecoController {
         return recoService.allProductRec(productId);
     }
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createRecoMsg(@RequestBody RecoEntity reco){
+    //@ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<String> createRecoMsg(@RequestBody RecoEntity reco){
         logger.info("createRecoMsg()");
-        recoService.createRecom(reco);
-        //return recoService.createRecom(reco);
+        Boolean status = recoService.createRecom(reco);
+        if(status == false){
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Rating is to large (CODE 406)\n");
+        }else {
+            return ResponseEntity.status(HttpStatus.CREATED).body("Information is save Code (CODE 201)\n");
+        }
     }
 
-    @DeleteMapping("{recomsgId}")
-    public void diactivetRecoMsg(@PathVariable ("recomsgId") int productId){
+    @DeleteMapping("{productId}")
+    public void diactivetRecoMsg(@PathVariable ("productId") int productId){
         logger.info("diactivetRecoMsg({})", productId);
         recoService.diactivetRecomByProdId(productId);
     }

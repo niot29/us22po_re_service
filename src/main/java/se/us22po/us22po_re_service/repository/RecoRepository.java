@@ -12,6 +12,8 @@ public interface RecoRepository extends JpaRepository<RecoEntity, Integer> {
     boolean existsById(Integer id);
 
     List<RecoEntity> findByProductId(int productId);
+    List<RecoEntity> findByProductIdAndStatus(int productId, int status);
+
 
     // List<RecoEntity> findByEmail(String email);
 

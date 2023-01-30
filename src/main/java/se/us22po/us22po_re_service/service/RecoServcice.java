@@ -33,7 +33,9 @@ public class RecoServcice {
      */
     public List<RecoEntity> allProductRec(int productId){
         logger.info("allProductRec({})",productId);
-        return reco.findByProductId(productId);
+        //return reco.findByProductId(productId);
+        return reco.findByProductIdAndStatus(productId,1);
+
     }
 
     /**
